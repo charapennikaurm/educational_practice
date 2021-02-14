@@ -1,0 +1,11 @@
+commit 78726a787204050c06e102cb7c6c0b00d3920720 (HEAD -> master)
+Author: Roman Cherepennikov <fpm.cherepen@bsu.by>
+Date:   Sun Feb 14 19:21:03 2021 +0300
+
+    add status.txt
+
+commit b31857abcfda20cb12a9a5992f2f40607855a785
+Author: Roman Cherepennikov <fpm.cherepen@bsu.by>
+Date:   Sun Feb 14 19:17:54 2021 +0300
+
+    add .gitignore
