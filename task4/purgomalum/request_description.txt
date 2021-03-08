@@ -1,0 +1,14 @@
+ PurgoMalum is service for filtering and removing content of profanity, obscenity and other unwanted text.
+
+1) Normal text request:
+text - Input text to be processed.
+
+2) Normal text request, but "world" added to profanity list
+add - A comma separated list of words to be added to the profanity list. Accepts letters, numbers, underscores (_) and commas (,). Accepts up to 10 words (or 200 maximum characters in length).
+      The PurgoMalum filter is case-insensitive, so the case of your entry is not important.
+
+3) Request with profanity text
+
+4) Request with profanity text and custom filler
+fill_char - ingle character used to replace any words matching the profanity list. Fills designated character to length of word replaced. Accepts underscore (_) tilde (~), dash/hyphen (-), equal sign (=), pipe (|) and
+	    asterisk (*). When not used, the default is an asterisk (*) fill.
