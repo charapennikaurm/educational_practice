@@ -1,0 +1,11 @@
+Weather API by MetaWeather
+
+1) request for weather by location name
+query - Text to search for.
+
+2) request for weather by location Where On Earth ID
+woeid - Where On Earth ID
+
+3) request for weather by coordinates
+lattlong - Coordinates to search for locations near. Comma separated lattitude and longitude
+

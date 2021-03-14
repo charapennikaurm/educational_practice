@@ -1,0 +1,8 @@
+API for hand curated Chuck Norris jokes
+
+1)random joke about chuck norris
+
+2)random joke with custom name
+firstName and lastName sets the name of main character of the joke
+
+3)requset for 3 jokes
