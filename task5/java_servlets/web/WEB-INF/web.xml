@@ -44,20 +44,20 @@
         <url-pattern>/page</url-pattern>
     </servlet-mapping>
 
-    <!--test1Servlet -->
+    <!--Test1Servlet -->
     <servlet>
         <servlet-name>test1Servlet</servlet-name>
-        <servlet-class>com.bsu.test1Servlet</servlet-class>
+        <servlet-class>com.bsu.Test1Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>test1Servlet</servlet-name>
         <url-pattern>/test1</url-pattern>
     </servlet-mapping>
 
-    <!--test2Servlet -->
+    <!--Test2Servlet -->
     <servlet>
         <servlet-name>test2Servlet</servlet-name>
-        <servlet-class>com.bsu.test2Servlet</servlet-class>
+        <servlet-class>com.bsu.Test2Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>test2Servlet</servlet-name>

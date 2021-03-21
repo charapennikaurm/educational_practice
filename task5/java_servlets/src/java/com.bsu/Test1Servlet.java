@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class test2Servlet extends HttpServlet {
+public class Test1Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/page").forward(req,resp);
+        req.getRequestDispatcher("/status").forward(req,resp);
     }
 }
