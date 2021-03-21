@@ -9,14 +9,9 @@ import java.io.IOException;
 
 public class CheckServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         resp.setContentType("application/json");
         String response = "{\"sucess\":true}";
         resp.getWriter().println(response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        doGet(req,resp);
     }
 }
