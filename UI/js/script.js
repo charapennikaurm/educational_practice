@@ -1,3 +1,4 @@
+(function (){
 // example of element of adList
 let adItem = {
     id: '0',
@@ -307,16 +308,16 @@ let adList = [
 
 //                           FUNCTIONS
 
-let getAd = (function(id){
-    for (let i =0; i<adList.length;++i){
-        if(adList[i].id == id){
-            return adList[i];
-        }
+function getAd(id){
+    let result = adList.find(currentValue => currentValue.id == id);
+    if(result == undefined){
+        return {};
+    } else{
+        return result;
     }
-    return {};
-});
+}
 
-let validateAd = (function(ad){
+function validateAd(ad){
     if (typeof(ad.id) == 'string' &&
     typeof(ad.description) == 'string' && ad.description.length < 200  &&
     ad.createdAt instanceof Date &&  
@@ -329,9 +330,9 @@ let validateAd = (function(ad){
     }else{
         return false;
     }
-});
+}
 
-let addAd = (function(ad){
+function addAd(ad){
     for (let i =0; i<adList.length;++i){
         if(adList[i].id === ad.id){
             return false;
@@ -343,9 +344,9 @@ let addAd = (function(ad){
     }else{
         return false;
     }
-});
+}
 
-let removeAd = (function(id){
+function removeAd(id){
     for (let i = 0;i<adList.length;++i){
         if(adList[i].id === id){
             adList.splice(i,1);
@@ -353,95 +354,84 @@ let removeAd = (function(id){
         }
     }
     return false;
-});
+}
 
-let editAd = (function(id,changes){
+function editAd(id,changes){
     // checking not to edit fields id author createdAt
     let keys = Object.keys(changes);
     if(keys.includes('id') || keys.includes('author') || keys.includes('createdAt')){
         return false;
     }
     // finding index of element to change
-    let ind;
-    for(let i=0;i<=adList.length;++i){
-        if(i == adList.length){
-            return false;
-        }else if(adList[i].id === id){
-            ind = i;
-            break;
-        }
+    let ind = adList.findIndex(currentValue => currentValue.id == id);
+    if (ind === -1) {
+        return false;
     }
-    new_ad = adList[ind];
+    newAd = Object.assign(adList[ind]);
     for(let i=0;i<=adList.length;++i){
-        new_ad[keys[i]] = changes[keys[i]];
+        newAd[keys[i]] = changes[keys[i]];
     }
-    if(validateAd(new_ad)){
-        adList[ind] = new_ad;
+    if(validateAd(newAd)){
+        adList[ind] = newAd;
         return true;
     }else{
         return false;
     }
 
-});
+}
 
-let getAds = (function(skip = 0, top = 10, filterConfig = {}){
+function filterByVendors(ads, vendors,skip, top){
+    return ads.filter(сurrentValue => vendors.includes(сurrentValue.vendor)).slice(skip,top);
+}
+
+function filterByTags (ads, hashTags, skip, top){
+    return ads.filter (currentValue => {
+        for(let j = 0;j<currentValue.hashTags.length;++j){
+            if(hashTags.includes(currentValue.hashTags[j])){
+                return true;
+            }
+        }
+        return false;
+    }).slice(skip,top);
+}
+
+function getAds(skip = 0, top = 10, filterConfig = {}){
     let adsToShow = [];
-    let key = Object.keys(filterConfig);
+    let keys = Object.keys(filterConfig);
 
-    if(key.length == 0){ //no filter used
-        for(let i=skip;i<top+skip;++i){
-            if(i > adList.length){
-                break;
-            }
-            adsToShow.push(adList[i]);
+    if(keys.length == 0){ //no filter used
+        adsToShow = adList.slice(skip,top);
+    }else if (keys.length == 1){
+        if(keys[0] == 'hashTags'){
+            adsToShow = filterByTags(adList, filterConfig[keys[0]],skip, top);
+        } else if(keys[0] == 'vendors'){
+            adsToShow = filterByVendors(adList, filterConfig[keys[0]],skip, top);
         }
-    } else if(key[0] == 'vendors'){//using vendors filter
-        let vendors = filterConfig[[key[0]]];
-        let skipped_ads = 0;
-        let i = 0;
-        while(skipped_ads < skip && i < adList.length){
-            if(vendors.includes(adList[i].vendor)){
-                skipped_ads++;
-            }
-            i++;
-        }
-        while(i < adList.length && adsToShow.length < top){
-            if(vendors.includes(adList[i].vendor)){
-                adsToShow.push(adList[i]);
-            }
-            i++;
-        }
-    }else if(key[0] == 'hashTags'){//using hashtags filter
-        let hashTags = filterConfig[[key[0]]];
-        let skipped_ads = 0;
-        let i = 0;
-        while(skipped_ads<skip && i < adList.length){
-            for(let j = 0;j<adList[i].hashTags.length;++j){
-                if(hashTags.includes(adList[i].hashTags[j])){
-                    skipped_ads++;
-                    break;
-                }
-            }
-            i++;
-        }
-        while(i < adList.length && adsToShow.length < top){
-            for(let j = 0;j<adList[i].hashTags.length;++j){
-                if(hashTags.includes(adList[i].hashTags[j])){
-                    adsToShow.push(adList[i]);
-                    break;
-                }
-            }
-            i++;
+    }else if(keys.length == 2){
+        if(keys[0] == 'hashTags'){
+            adsToShow = filterByTags(adList, filterConfig[keys[0]],skip, top);
+            adsToShow = filterByVendors(adsToShow,filterConfig[keys[1]],0,top);
+        }else if(keys[0] == 'vendors'){
+            adsToShow = filterByVendors(adList, filterConfig[keys[0]],skip, top);
+            adsToShow = filterByTags(adsToShow,filterConfig[keys[1]],0,top);
         }
     }
+    //sorting by creation date
+    adsToShow.sort(function(a,b){
+        return a.createdAt - b.createdAt;
+    });
     return adsToShow;
-});
+}
 //                           TESTS
 console.log('getAds');
 console.log(getAds()); 
 console.log(getAds(14, 8))
 console.log(getAds(0,10,{vendors : ['Steam', 'Netflix', 'Bar Insomnia']}));
 console.log(getAds(0,10,{hashTags : ['art']}));
+console.log(getAds(0,10,{
+    vendors : ['Steam', 'Netflix', 'Bar Insomnia'],
+    hashTags : ['art']
+}));
 
 console.log('getAd');
 console.log(getAd(147));
@@ -511,8 +501,10 @@ console.log(editAd('23',{description:'Some random description'}));//false (can't
 console.log(editAd('1',{description:'Some random description', link : 'random.org'}));//true
 console.log(getAd(1));
 
+
 console.log('removeAd');
 console.log(removeAd('33'));//false
 console.log(getAd('1'));//object with id == '1' still in adList
 console.log(removeAd('1'));//true
 console.log(getAd('1'));//no object with id == '1' in adList
+}());
