@@ -13,14 +13,9 @@ class AdCollection{
     }
 
     _filterByTags (ads, hashTags, skip, top){
-        return ads.filter (currentValue => {
-            for(let j = 0;j<currentValue.hashTags.length;++j){
-                if(hashTags.includes(currentValue.hashTags[j])){
-                    return true;
-                }
-            }
-            return false;
-        }).slice(skip,skip+top);
+        return ads.filter(currentAd =>{
+            return hashTags.some(hashTag =>{ return currentAd.hashTags.includes(hashTag)})
+        });
     }
 
     getPage(skip = 0, top = 10, filterConfig = {}){
@@ -38,10 +33,14 @@ class AdCollection{
         }else if(keys.length == 2){
             if(keys[0] == 'hashTags'){
                 adsToShow = this._filterByTags(this._adList, filterConfig[keys[0]],skip, top);
-                adsToShow = this._filterByVendors(adsToShow,filterConfig[keys[1]],0,top);
+                if (keys[1] == 'vendors'){
+                    adsToShow = this._filterByVendors(adsToShow,filterConfig[keys[1]],0,top);
+                }
             }else if(keys[0] == 'vendors'){
                 adsToShow = this._filterByVendors(this._adList, filterConfig[keys[0]],skip, top);
-                adsToShow = this._filterByTags(adsToShow,filterConfig[keys[1]],0,top);
+                if (keys[1] == 'hashTags'){
+                    adsToShow = this._filterByTags(adsToShow,filterConfig[keys[1]],0,top);
+                }
             }
         }
         //sorting by creation date
