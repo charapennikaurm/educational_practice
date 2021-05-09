@@ -2,6 +2,7 @@ package com.bsu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AdCollection {
@@ -41,42 +42,24 @@ public class AdCollection {
         return null;
     }
 
-    public static boolean validate(Ad ad) {
-        if (ad.getId() == null || ad.getId().length() < 1)
-            return false;
-        if (ad.getDescription() == null || ad.getDescription().length() >= 200)
-            return false;
-        if (ad.getCreatedAt() == null)
-            return false;
-        if (ad.getVendor() == null || ad.getVendor().length() < 1)
-            return false;
-        if (ad.getHashTags() == null)
-            return false;
-        if (ad.getDiscount() == null || ad.getDiscount().length() < 1)
-            return false;
-        if (ad.getValidUntil() == null)
-            return false;
-        return true;
-    }
-
     public boolean add(Ad ad) {
         if (this.ads.stream().anyMatch(element -> element.getId().equals(ad.getId())))
             return false;
-        if (validate(ad)) {
+        if (Ad.validate(ad)) {
             this.ads.add(ad);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean remove(String id) {
-        if (this.ads.stream().anyMatch(ad -> ad.getId().equals(id))) {
-            this.ads = ads.stream().filter(ad -> !ad.getId().equals(id))
-                    .collect(Collectors.toCollection(ArrayList::new));
             return true;
         }
         return false;
+    }
+
+    public boolean remove(String id) {
+        Optional<Ad> ad = ads.stream().filter(e -> e.getId().equals(id)).findFirst();
+        if(ad.isPresent()){
+            ads.remove(ad.get());
+            return true;
+        }
+        return false;
+
     }
 
     public List<Ad> addAll(List<Ad> newAds) {
@@ -101,10 +84,9 @@ public class AdCollection {
             return filterByVendors(this.ads, filter.getVendors(), skip, top);
         } else if (filter.getVendors().size() == 0) {
             return filterByTags(this.ads, filter.getHashTags(), skip, top);
-        } else {
-            return filterByTags(filterByVendors(this.ads, filter.getVendors(), skip, top),
-                    filter.getHashTags(), 0, top);
         }
+        return filterByTags(filterByVendors(this.ads, filter.getVendors(), skip, top),
+                    filter.getHashTags(), 0, top);
     }
 
     public boolean edit(String id, Ad changes) {
@@ -132,20 +114,14 @@ public class AdCollection {
             changedAd.setPhotoLink(changes.getPhotoLink());
         }
         if (changes.getReviews() != null) {
-            List<Review> reviews = changes.getReviews();
-            changedAd.setReviews(reviews);
-            double rating = 0;
-            for (Review review : reviews) {
-                rating += review.getRating();
-            }
-            rating /= reviews.size();
-            changedAd.setRating(rating);
+            changedAd.setReviews(changes.getReviews());
+            changedAd.setRating(changes.getRating());
         }
         if (changes.getValidUntil() != null) {
             changedAd.setValidUntil(changes.getValidUntil());
         }
 
-        if (validate(changedAd)) {
+        if (Ad.validate(changedAd)) {
             for (Ad ad : ads) {
                 if (ad.getId().equals(id)) {
                     ad = changedAd;

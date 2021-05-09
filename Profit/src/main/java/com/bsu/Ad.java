@@ -32,10 +32,6 @@ public class Ad {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -114,5 +110,23 @@ public class Ad {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public static boolean validate(Ad ad) {
+        if (ad.getId() == null || ad.getId().length() < 1)
+            return false;
+        if (ad.getDescription() == null || ad.getDescription().length() >= 200)
+            return false;
+        if (ad.getCreatedAt() == null)
+            return false;
+        if (ad.getVendor() == null || ad.getVendor().length() < 1)
+            return false;
+        if (ad.getHashTags() == null)
+            return false;
+        if (ad.getDiscount() == null || ad.getDiscount().length() < 1)
+            return false;
+        if (ad.getValidUntil() == null)
+            return false;
+        return true;
     }
 }

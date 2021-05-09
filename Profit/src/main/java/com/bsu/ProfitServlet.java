@@ -43,7 +43,7 @@ public class ProfitServlet extends HttpServlet {
         if (url.length == 3 && url[2].equals("search")) {
             Gson gson = new Gson();
             resp.getWriter().print(adCollection.getAllAds().stream().map(gson::toJson).
-                    collect(Collectors.joining("/n")));
+                    collect(Collectors.joining("\n")));
         }
     }
 }
