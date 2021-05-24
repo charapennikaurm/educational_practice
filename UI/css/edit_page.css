@@ -1,0 +1,186 @@
+.header {
+  background-color: #fff;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  padding: 50px;
+}
+@media (max-width: 600px) {
+  .nav__username {
+    display: none;
+  }
+}
+
+/* Product Top 
+===================*/
+
+.product-edit-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.product-edit__main-info {
+  width: 25%;
+}
+.main-info__icon {
+  width: 100%;
+  margin-bottom: 25px;
+  border-radius: 30px;
+  border: 2px solid #cfcfcf;
+}
+
+
+.product-edit__add-info {
+  width: 65%;
+}
+.add-info__meta {
+  display: flex;
+  justify-content: space-between;
+}
+.add-info__meta input[type=text]{
+  width: 20%;
+}
+
+
+/* Product Bot 
+===================*/
+
+.product-edit-bot {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 800px) {
+  .product-edit-top {
+    display: inline;
+  }
+  .main-info__icon {
+    width: 50%;
+  }
+  .product-edit__main-info {
+    width: 100%;
+    text-align: center;
+  }
+  .product-edit__add-info {
+    width: 100%;
+  }
+  .add-info__meta {
+    display: inline;
+  }
+  .add-info__meta input[type=text]{
+    width: 30%;
+  }
+}
+
+/* Publish
+===================*/
+
+.product-edit__publish {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+
+.publish__date{
+  width: 33.3%;
+  padding: 0px 50px;
+}
+
+.publish{
+  width: 33.3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.publish__button {
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  padding: 10px 30px;
+  border-radius: 15px;
+  background: rgb(202, 54, 54);
+  transition: 0.2s;
+} 
+.publish__button:hover { 
+  background: rgb(136, 36, 36); 
+}
+
+@media (max-width: 800px) {
+  .product-edit__publish {
+    display: inline;
+  }
+  .publish__date {
+    width: 100%;
+    margin: auto;
+  }
+  .publish {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+/* STRUCTURE
+===================*/
+
+#description {
+  size: 300px;
+}
+
+textarea {
+  background:#f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  margin-bottom: 30px;
+  width: 100%;
+  border: 2px solid #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+  height: 300px; 
+ }
+
+@media (max-width: 1000px) {
+  textarea {
+    height: 200px; 
+  }
+}
+@media (max-width: 800px) {
+  textarea {
+    height: 150px; 
+  }
+}
+@media (max-width: 600px) {
+  textarea {
+    height: 100px; 
+  }
+}
+@media (max-width: 400px) {
+  textarea {
+    height: 50px; 
+  }
+}
+
+input[type=text] {
+  width: 100%;
+ }
+
+.footer {
+  padding: 20px 50px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
