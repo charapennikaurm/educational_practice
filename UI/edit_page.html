@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css?family=Cardo:400i|Open+Sans:700|Raleway:400,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/edit_page.css">
+
+  <!-- fontawesome-->
+  <script src="https://kit.fontawesome.com/7e5d871aa3.js" crossorigin="anonymous"></script>
+  <!-- ---------- -->
+
+  <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/parallax.js-1.5.0/parallax.min.js"></script>
+
+  <title>Profit</title>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header__inner">
+    <img class="header__logo" src="images/intro/logo.png" alt="Logo">
+
+    <nav class="nav">
+      <a class="nav__username" href="#">username</a>
+      <a class="nav__link" href="#add_product">add product</a>
+      <a class="nav__link" href="#sign_out">sign in</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrapper">
+  <div class="product-edit-top">
+    <div class="product-edit__main-info">
+      <img class="main-info__icon" src="images/product/icon.png" alt="Product">
+    </div>
+    <div class="product-edit__add-info">
+      <div class="add-info__title">
+        <input type="text" id="title" class="fadeIn second" name="title" placeholder="Title">
+      </div>
+      <div class="add-info__desc">
+        <textarea  type="text" id="description" class="fadeIn second" name="description" placeholder="Short description"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-edit-bot">
+    <div class="product-edit__main-info">
+      <div class="main-info__profit">
+        <input type="text" id="profit" class="fadeIn second" name="profit" placeholder="sale %">
+      </div>
+      <div class="main-info__date">
+        <input type="text" id="date" class="fadeIn second" name="date" placeholder="Expires on:">
+      </div>
+    </div>
+    <div class="product-edit__add-info">
+      <div class="add-info__link">
+        <input type="text" id="link" class="fadeIn second" name="link" placeholder="Website link">
+      </div>
+      <div class="add-info__meta">
+        <input type="text" id="tag" class="fadeIn second" name="tag" placeholder="#tag1">
+        <input type="text" id="tag" class="fadeIn second" name="tag" placeholder="#tag2">
+        <input type="text" id="tag" class="fadeIn second" name="tag" placeholder="#tag3">
+        <input type="text" id="tag" class="fadeIn second" name="tag" placeholder="#tag4">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-edit__publish">
+  <div class="publish__date">
+    <div class="product__date">
+      <span class="text">Published on:</span> 
+      <time datetime="2021-12-23">21.12.23</time>
+    </div>
+  </div>
+  <div class="publish">
+    <button class="publish__button">
+      publish
+    </button>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-text">
+    <p>Created by Roman Cherepennikov</p>
+    <p>2 course 8 group</p>
+    <p>fpm.cherepen@bsu.by</p>
+    <p>21.02.2021</p>
+  </div>   
+</footer>
+
+</body>
+</html>
